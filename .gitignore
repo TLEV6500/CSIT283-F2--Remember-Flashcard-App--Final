@@ -1,22 +1,10 @@
 # Gradle files
-*.iml
-.gradle
 .gradle/
 build/
+
 # Local configuration file (sdk path, etc)
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
 local.properties
+/local.properties
 
 # Log/OS Files
 *.log
@@ -30,7 +18,18 @@ output.json
 
 # IntelliJ
 *.iml
-.idea/
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
