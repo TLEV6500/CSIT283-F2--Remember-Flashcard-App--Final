@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.RememberFlashcardAppFinal" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/green</item>
+    </style>
+
+    <style name="Theme.RememberFlashcardAppFinal" parent="Base.Theme.RememberFlashcardAppFinal" />
+
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set splash screen background -->
+        <item name="windowSplashScreenBackground">@color/green</item>
+        <!-- Use app icon (vector or layered) -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/remember_launcher_foreground</item>
+        <!-- Duration (milliseconds) -->
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <!-- Post-splash theme -->
+        <item name="postSplashScreenTheme">@style/Theme.RememberFlashcardAppFinal</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/green</item>  <!-- Customize buttons -->
+        <item name="colorOnSurface">@color/black</item>  <!-- Text color -->
+    </style>
+</resources>
