@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260558590943",
+    "project_id": "remember-def37",
+    "storage_bucket": "remember-def37.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260558590943:android:7830b84c75795bd04d6a6a",
+        "android_client_info": {
+          "package_name": "com.csit284.remember_flashcard_app__final"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC09tAZGXSCS01XcW1shjRJ2NO9Ywz_RFk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
