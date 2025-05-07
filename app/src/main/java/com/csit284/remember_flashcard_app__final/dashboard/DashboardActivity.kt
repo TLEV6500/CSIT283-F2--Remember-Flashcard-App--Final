@@ -2,6 +2,7 @@ package com.csit284.remember_flashcard_app__final.dashboard
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,10 +17,14 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TLEV", this.localClassName)
         super.onCreate(savedInstanceState)
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.included.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.btnStudyNow.setOnClickListener {
             startActivity(Intent(this, StudySessionActivity::class.java))

@@ -1,21 +1,28 @@
 package com.csit284.remember_flashcard_app__final.profile
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.csit284.remember_flashcard_app__final.R
+import com.csit284.remember_flashcard_app__final.databinding.ActivityProfileBinding
+import com.csit284.remember_flashcard_app__final.model.firebase.FirebaseProfileRepository
 
 class ProfileActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileBinding
+    private lateinit var viewModel: ProfileViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TLEV", this.localClassName)
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_profile)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        val userRepo = FirebaseProfileRepository()
+        viewModel = ProfileViewModel(userRepo)
+
+        binding = ActivityProfileBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setSupportActionBar(binding.included.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
     }
 }

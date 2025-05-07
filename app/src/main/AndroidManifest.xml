@@ -14,35 +14,39 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
-            android:name=".deck.DeckActivity"
-            android:exported="false" />
-        <activity
             android:name=".profile.ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".dashboard.DashboardActivity"/>
         <activity
             android:name=".study.StudySessionActivity"
+            android:exported="false"
+            android:parentActivityName=".dashboard.DashboardActivity"/>
+        <activity
+            android:name=".flashcard.FlashcardEditorActivity"
             android:exported="false" />
         <activity
-            android:name=".flashcard.FlashcardEditor"
-            android:exported="false" />
-        <activity
-            android:name=".flashcard.FlashcardBrowser"
-            android:exported="false" />
+            android:name=".flashcard.FlashcardBrowserActivity"
+            android:exported="false"
+            android:parentActivityName=".deck.DeckCollectionActivity"/>
         <activity
             android:name=".deck.DeckCollectionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".dashboard.DashboardActivity"/>
         <activity
             android:name=".dashboard.DashboardActivity"
             android:exported="false"
-            android:theme="@style/Theme.RememberFlashcardAppFinal" />
+            android:theme="@style/Theme.RememberFlashcardAppFinal"
+            android:parentActivityName=".auth.AuthActivity"/>
         <activity
             android:name=".auth.AuthActivity"
             android:exported="false"
-            android:theme="@style/Theme.RememberFlashcardAppFinal" />
+            android:theme="@style/Theme.RememberFlashcardAppFinal"
+            android:parentActivityName=".core.LandingActivity"/>
         <activity
             android:name=".about.AboutActivity"
             android:exported="false"
-            android:theme="@style/Theme.RememberFlashcardAppFinal" />
+            android:theme="@style/Theme.RememberFlashcardAppFinal"
+            android:parentActivityName=".core.LandingActivity"/>
         <activity
             android:name=".core.LandingActivity"
             android:exported="false"

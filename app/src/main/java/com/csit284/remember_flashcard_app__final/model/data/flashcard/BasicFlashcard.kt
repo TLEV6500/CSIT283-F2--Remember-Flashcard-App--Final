@@ -10,13 +10,11 @@ data class BasicFlashcard(
     override val deckId: String,
     override val question: String,
     override val answer: String,
-    override val lastReviewed: Date?
+    override val intervalInDays: Int = 1, // days
+    override val easeFactor: Double = 2.5,
+    override val lastReviewed: Date?,
+    override val nextReviewDate: Date? = null,
+    override val reviewCount: Int = 0
 ) : Flashcard {
-    override fun toMap(): Map<String, Any> = mapOf(
-        "authorId" to authorId,
-        "deckId" to deckId,
-        "question" to question,
-        "answer" to answer,
-        "lastReviewed" to (lastReviewed ?: FieldValue.serverTimestamp())
-    )
+    override fun toMap(): Map<String, Any> = Flashcard.toMap(this)
 }

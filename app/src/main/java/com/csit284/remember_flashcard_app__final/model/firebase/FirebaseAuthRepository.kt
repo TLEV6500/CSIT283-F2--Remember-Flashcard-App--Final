@@ -1,10 +1,12 @@
 package com.csit284.remember_flashcard_app__final.model.firebase
 
+import com.csit284.remember_flashcard_app__final.Application
 import com.csit284.remember_flashcard_app__final.model.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 
 class FirebaseAuthRepository(
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val app: Application
 ) : AuthRepository {
 
     override fun login(
@@ -15,6 +17,7 @@ class FirebaseAuthRepository(
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    app.user = auth.currentUser
                     callback(Result.success(Unit))
                 } else {
                     callback(Result.failure(task.exception ?: Exception("Login failed")))
@@ -30,6 +33,7 @@ class FirebaseAuthRepository(
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    app.user = auth.currentUser
                     callback(Result.success(Unit))
                 } else {
                     callback(Result.failure(task.exception ?: Exception("Signup failed")))
@@ -43,5 +47,6 @@ class FirebaseAuthRepository(
 
     override fun logout() {
         auth.signOut()
+        app.user = null
     }
 }

@@ -19,7 +19,7 @@ class DeckViewModel(private val deckRepo: DeckRepository) {
         deckRepo.createDeck(name, callback)
     }
 
-    fun updateDeck(deck: Deck, callback: (Result<Unit>)->Unit) {
+    fun updateDeck(deck: DeckData, callback: (Result<Unit>)->Unit) {
         deckRepo.updateDeck(deck, callback)
     }
 

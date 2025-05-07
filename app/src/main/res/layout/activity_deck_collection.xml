@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     >
 
+    <include layout="@layout/top_bar" android:id="@+id/included"/>
+
     <!-- Deck List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewDecks"
@@ -23,5 +25,6 @@
         android:text="Add Deck"
         app:icon="@drawable/baseline_add_24"
         />
+
 
 </FrameLayout>

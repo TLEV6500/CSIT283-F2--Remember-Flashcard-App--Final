@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TLEV", this.localClassName)
         // Install splash screen before super.onCreate()
         val splashScreen = installSplashScreen()
         val auth = FirebaseAuth.getInstance();
@@ -26,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Redirect to Login or Dashboard based on auth state
-        if (auth.currentUser == null) {
-            startActivity(Intent(this, AuthActivity::class.java))
+        if (auth.currentUser != null) {
+            startActivity(Intent(this, LandingActivity::class.java))
         } else {
             startActivity(Intent(this, DashboardActivity::class.java))
         }

@@ -2,12 +2,15 @@ package com.csit284.remember_flashcard_app__final.deck
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.csit284.remember_flashcard_app__final.Application
 import com.csit284.remember_flashcard_app__final.R
 import com.csit284.remember_flashcard_app__final.databinding.ActivityDeckCollectionBinding
+import com.csit284.remember_flashcard_app__final.flashcard.FlashcardBrowserActivity
 import com.csit284.remember_flashcard_app__final.model.data.deck.DeckData
 import com.csit284.remember_flashcard_app__final.model.firebase.FirebaseDeckRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,12 +22,16 @@ class DeckCollectionActivity : AppCompatActivity() {
     private lateinit var adapter: DecksAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TLEV", this.localClassName)
         super.onCreate(savedInstanceState)
         binding = ActivityDeckCollectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.included.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         // Initialize ViewModel and Adapter
-        viewModel = DeckViewModel(FirebaseDeckRepository())
+        viewModel = DeckViewModel(FirebaseDeckRepository(app=application as Application))
 
         // Init Recycler View
         setupRecyclerView()
@@ -43,7 +50,7 @@ class DeckCollectionActivity : AppCompatActivity() {
         adapter.onDeleteClick = this::showDeleteDialog
 
         adapter.onDeckClick = { deck ->
-            val intent = Intent(this, DeckActivity::class.java).apply {
+            val intent = Intent(this, FlashcardBrowserActivity::class.java).apply {
                 putExtra("DECK_ID", deck.id)  // Pass the selected deck's ID
             }
             startActivity(intent)
@@ -64,6 +71,7 @@ class DeckCollectionActivity : AppCompatActivity() {
                     Toast.makeText(this@DeckCollectionActivity, err.message, Toast.LENGTH_SHORT)
                         .show()
                 }
+                Log.e("APP_REMEMBER", (localClassName+" " + err.message))
             }
         }
     }
@@ -82,6 +90,7 @@ class DeckCollectionActivity : AppCompatActivity() {
                     Toast.makeText(this@DeckCollectionActivity, err.message, Toast.LENGTH_SHORT)
                         .show()
                 }
+                Log.e("APP_REMEMBER", (localClassName+" " + err.message))
             }
         }
     }

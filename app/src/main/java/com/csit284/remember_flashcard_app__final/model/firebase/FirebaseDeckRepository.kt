@@ -1,5 +1,6 @@
 package com.csit284.remember_flashcard_app__final.model.firebase
 
+import com.csit284.remember_flashcard_app__final.Application
 import com.csit284.remember_flashcard_app__final.model.DeckRepository
 import com.csit284.remember_flashcard_app__final.model.data.deck.Deck
 import com.google.firebase.auth.FirebaseAuth
@@ -10,7 +11,8 @@ import com.csit284.remember_flashcard_app__final.model.data.deck.DeckData
 // Todo: Make generic to use different Deck subtypes, for future improvement
 class FirebaseDeckRepository(
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance(),
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance(),
+    private val app: Application
 ) : DeckRepository {
 
     // Fetch all decks for the current user
@@ -26,6 +28,7 @@ class FirebaseDeckRepository(
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val decks = it.result.toObjects(DeckData::class.java)
+                    app.updateSavedDecks(decks)
                     callback(Result.success(decks))
                 }
                 else callback(Result.failure(it.exception ?:Exception("Failed to fetch decks")))
@@ -44,13 +47,14 @@ class FirebaseDeckRepository(
             .add(deck)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    app.updateSavedDeck(deck)
                     callback(Result.success(Unit))
                 } else callback(Result.failure(it.exception ?: Exception("Failed to create deck")))
             }
     }
 
     // Update a deck
-    override fun updateDeck(deck: Deck, callback: (Result<Unit>)->Unit) {
+    override fun updateDeck(deck: DeckData, callback: (Result<Unit>)->Unit) {
         if (deck.id.isEmpty()) {
             callback(Result.failure(Exception("Deck ID is empty")))
             return
@@ -61,6 +65,7 @@ class FirebaseDeckRepository(
             .set(deck)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    app.updateSavedDeck(deck)
                     callback(Result.success(Unit))
                 } else callback(Result.failure(it.exception ?: Exception("Failed to update deck")))
             }
@@ -78,6 +83,7 @@ class FirebaseDeckRepository(
         doc.delete()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    app.deleteSavedDeck(deckId)
                     callback(Result.success(deck))
                 } else callback(Result.failure(it.exception ?: Exception("Failed to delete deck")))
             }

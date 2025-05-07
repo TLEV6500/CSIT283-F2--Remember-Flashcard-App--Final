@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.csit284.remember_flashcard_app__final.Application
 import com.csit284.remember_flashcard_app__final.R
 import com.csit284.remember_flashcard_app__final.dashboard.DashboardActivity
 import com.csit284.remember_flashcard_app__final.databinding.ActivityAuthBinding
@@ -20,13 +21,23 @@ class AuthActivity : AppCompatActivity() {
     private var isLoginMode = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("TLEV", this.localClassName)
         super.onCreate(savedInstanceState)
 
-        val authRepo: AuthRepository = FirebaseAuthRepository()
+        val authRepo: AuthRepository = FirebaseAuthRepository(app =application as Application)
         viewModel = AuthViewModel(authRepo)
 
+//        try {
+
         binding = ActivityAuthBinding.inflate(layoutInflater)
+//        } catch (e: Error) {
+//            Log.e("TLEV", e.message ?: e.toString())
+//        }
+//        Log.d("TLEV", this.localClassName + " ---")
         setContentView(binding.root)
+
+        setSupportActionBar(binding.included.topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setupUI()
         binding.btnSubmit.setOnClickListener { handleAuth() }
@@ -75,6 +86,7 @@ class AuthActivity : AppCompatActivity() {
                 }
                 task.onFailure {
                     Toast.makeText(this, "Signup failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("APP_REMEMBER", it.message ?: it.toString())
                 }
             }
         }

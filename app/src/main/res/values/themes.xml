@@ -3,10 +3,14 @@
     <style name="Base.Theme.RememberFlashcardAppFinal" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/green</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="titleTextAppearance">@id/none</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
-    <style name="Theme.RememberFlashcardAppFinal" parent="Base.Theme.RememberFlashcardAppFinal" />
-
+    <style name="Theme.RememberFlashcardAppFinal" parent="Base.Theme.RememberFlashcardAppFinal">
+    </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <!-- Set splash screen background -->
